@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MemoryGameModule } from './games/memory-game/memory-game.module';
+import { RequestService } from './services/request.service';
 
 @NgModule({
   declarations: [
@@ -10,9 +12,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MemoryGameModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ RequestService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
