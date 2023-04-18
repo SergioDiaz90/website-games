@@ -9,7 +9,7 @@ import { RequestService } from 'src/app/services/request.service';
 })
 export class MemoryGameComponent implements OnInit {
 
-  private dataCards: any;
+  public dataCards: any = undefined;
 
   constructor(
     private requestService: RequestService

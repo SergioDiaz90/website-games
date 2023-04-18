@@ -8,7 +8,7 @@ import { RequestService } from './services/request.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,6 @@
 <p>memory-game works!</p>
+<div *ngIf="dataCards !== undefined">
+    <div *ngFor="let objCard of dataCards.entries" >
+        <app-card [dataCard]="objCard"></app-card>
+    </div>
+</div>
