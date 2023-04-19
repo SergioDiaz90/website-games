@@ -14,20 +14,20 @@ export class MemoryGameComponent implements OnInit {
     success: 0,
     mistakes: 0
   }
-  private selections = {
+  private selections: any = {
     first: {
       id: undefined,
       title: '',
-      uuid: undefined
+      uuid: undefined,
+      full: false,
+      reference: ''
     },
     second: {
       id: undefined,
       title: '',
-      uuid: undefined
-    },
-    referenceCards: {
-      firstCard: undefined,
-      secondCard: undefined
+      uuid: undefined,
+      full: false,
+      reference: ''
     }
   }
 
@@ -74,9 +74,29 @@ export class MemoryGameComponent implements OnInit {
 
     if ( this.selections.first.title !== this.selections.second.title ) {
       this.scoreGame.mistakes += 1;
+
+      setTimeout(() => {
+        this.handlerShowOverlayCardAndReloadSelection( false );
+      }, 1000 );
     }
 
     console.log('handlerScoreGame', this.scoreGame );
+  }
+
+  private handlerShowOverlayCardAndReloadSelection ( show: boolean , reference: any = undefined ) {
+    if ( show && reference ) {
+      this.render.removeClass( reference, 'card-bg--hidden' );
+    }
+
+    if ( !show ) {
+      for (let idx in this.selections ) {
+        this.render.addClass( this.selections[idx].reference, 'card-bg--hidden' );
+      }
+
+      this.selections.first = {};
+      this.selections.second = {};
+    }
+
   }
 
   public handlerSelectionCard ( e: any ) {
@@ -84,30 +104,29 @@ export class MemoryGameComponent implements OnInit {
     let handlingEvent: any = {
       id: 0,
       title: '',
-      uuid: undefined
+      uuid: undefined,
+      full: false
     };
 
     let tmp = undefined;
 
-    if ( this.selections.first.id && this.selections.second.id ) {
-      return
-    } else {
-      this.render.removeClass( e.target, 'card-bg--hidden' );
-      tmp = this.searchImgInCard(e.target.offsetParent.childNodes);
-      handlingEvent.id = e.target.offsetParent.getAttribute('id');
-      handlingEvent.title = tmp.getAttribute('alt');
-      handlingEvent.uuid = tmp.getAttribute('name');
-    }
+    tmp = this.searchImgInCard(e.target.offsetParent.childNodes);
+    handlingEvent.reference = e.target;
+    handlingEvent.id = e.target.offsetParent.getAttribute('id');
+    handlingEvent.title = tmp.getAttribute('alt');
+    handlingEvent.uuid = tmp.getAttribute('name');
+    handlingEvent.full = true;
+    this.handlerShowOverlayCardAndReloadSelection( true, handlingEvent.reference );
 
-    if ( !this.selections.first.id ) {
+    if ( !this.selections.first.full ) {
       this.selections.first = handlingEvent
     } else {
       this.selections.second = handlingEvent;
+    }
+    
+    if ( this.selections.first.full && this.selections.second.full ) {
       this.handlerScoreGame();
     }
-
-    console.log('asignación dos', this.selections );
-    
   }
 
 
