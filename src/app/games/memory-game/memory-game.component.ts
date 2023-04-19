@@ -10,10 +10,12 @@ import { dataCardWithGameMemory } from 'src/app/_interface/common';
 })
 export class MemoryGameComponent implements OnInit {
   public dataGame: dataCardWithGameMemory | any;
-  private scoreGame = {
+  public scoreGame = {
     success: 0,
     mistakes: 0
   }
+  private foundPairs: any = [];
+
   private selections: any = {
     first: {
       id: undefined,
@@ -30,7 +32,6 @@ export class MemoryGameComponent implements OnInit {
       reference: ''
     }
   }
-
 
   constructor(
     private requestService: RequestService,
@@ -68,22 +69,26 @@ export class MemoryGameComponent implements OnInit {
   }
 
   private handlerScoreGame () {
+
     if ( this.selections.first.title === this.selections.second.title ) {
+      let copy = { ...this.selections }
       this.scoreGame.success += 1;
+      this.foundPairs.push(copy);
     }
 
     if ( this.selections.first.title !== this.selections.second.title ) {
       this.scoreGame.mistakes += 1;
 
       setTimeout(() => {
-        this.handlerShowOverlayCardAndReloadSelection( false );
+        this.handlerShowOverlayCardAndReloadSelection( false , true );
       }, 1000 );
     }
 
     console.log('handlerScoreGame', this.scoreGame );
   }
 
-  private handlerShowOverlayCardAndReloadSelection ( show: boolean , reference: any = undefined ) {
+  private handlerShowOverlayCardAndReloadSelection ( show: boolean, clear: boolean = false, reference: any = undefined ) {
+
     if ( show && reference ) {
       this.render.removeClass( reference, 'card-bg--hidden' );
     }
@@ -92,14 +97,29 @@ export class MemoryGameComponent implements OnInit {
       for (let idx in this.selections ) {
         this.render.addClass( this.selections[idx].reference, 'card-bg--hidden' );
       }
+    }
 
+    if ( clear ) {
       this.selections.first = {};
       this.selections.second = {};
     }
 
   }
 
+  private handlerNoRepeatSelection ( title: string ): any {
+    if ( this.scoreGame.success !== 0 ) {
+      let result = this.foundPairs.filter((elm: { first: { title: string; }; second: { title: any; }; }) => elm.first.title === title || elm.second.title === title );
+      console.log('result', result )
+      return result.length > 0 ? true : false;
+    }
+    
+    if ( this.scoreGame.success === 0 ) {
+      return false
+    }
+
+  }
   public handlerSelectionCard ( e: any ) {
+    e.preventDefault();
 
     let handlingEvent: any = {
       id: 0,
@@ -108,15 +128,23 @@ export class MemoryGameComponent implements OnInit {
       full: false
     };
 
-    let tmp = undefined;
+    let tmp = this.searchImgInCard(e.target.offsetParent.childNodes);
+    let title = tmp.getAttribute('alt');
+    let repeatCard = this.handlerNoRepeatSelection( title );
 
-    tmp = this.searchImgInCard(e.target.offsetParent.childNodes);
-    handlingEvent.reference = e.target;
-    handlingEvent.id = e.target.offsetParent.getAttribute('id');
-    handlingEvent.title = tmp.getAttribute('alt');
-    handlingEvent.uuid = tmp.getAttribute('name');
-    handlingEvent.full = true;
-    this.handlerShowOverlayCardAndReloadSelection( true, handlingEvent.reference );
+    if ( !repeatCard ) {
+      handlingEvent.title = title;
+      handlingEvent.id = e.target.offsetParent.getAttribute('id');
+      handlingEvent.uuid = tmp.getAttribute('name');
+      handlingEvent.full = true;
+      handlingEvent.reference = e.target;
+      this.handlerShowOverlayCardAndReloadSelection( true, false, handlingEvent.reference );
+      console.log('handlingEvent', handlingEvent );
+    } else {
+      console.log('esta carta esta repetida')
+      this.handlerShowOverlayCardAndReloadSelection( true, true );
+      return
+    }
 
     if ( !this.selections.first.full ) {
       this.selections.first = handlingEvent

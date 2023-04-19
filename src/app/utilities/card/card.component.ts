@@ -13,10 +13,18 @@ export class CardComponent implements OnInit {
   @Input() use : string = '';
   @Input() image: string = '';
   @Input() title: string = '';
-  @Input() showOverlay: boolean = true;
+  @Input() showOverlay: boolean = false;
   @Input() numberId: number | undefined;
   @Input() uuid: string = '';
 
-  async ngOnInit() {}
+  async ngOnInit() {
+    this.handlerTimeOutForOverlay ();
+  }
+
+  private handlerTimeOutForOverlay () {
+    setTimeout(() => {
+      this.showOverlay = true;
+    }, 1000 );
+  }
 
 }

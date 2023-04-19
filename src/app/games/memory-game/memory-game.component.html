@@ -1,4 +1,7 @@
-
+<div class="memorygame-score">
+    <h1>Aciertos: {{ scoreGame.success }}</h1>
+    <h1>Errores: {{ scoreGame.mistakes }}</h1>
+</div>
 <div
     *ngIf="dataGame !== undefined"
     class="memorygame-wrapper">
