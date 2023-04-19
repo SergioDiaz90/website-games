@@ -1,6 +1,15 @@
-<p>memory-game works!</p>
-<div *ngIf="dataCards !== undefined">
-    <div *ngFor="let objCard of dataCards.entries" >
-        <app-card [dataCard]="objCard"></app-card>
+
+<div
+    *ngIf="dataGame !== undefined"
+    class="memorygame-wrapper">
+    <div *ngFor="let objCard of dataGame.entries; let i = index" >
+        <app-card
+            [image]="objCard.fields.image.url"
+            [title]="objCard.fields.image.title"
+            [uuid]="objCard.fields.image.uuid"
+            [use]="'memory'"
+            [numberId]="i"
+            (click)="handlerSelectionCard($event)"
+            #card></app-card>
     </div>
 </div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MemoryGameRoutingModule } from './memory-game-routing.module';
 import { MemoryGameComponent } from './memory-game.component';
-import { CardComponent } from 'src/app/components/card/card.component';
+import { CardComponent } from 'src/app/utilities/card/card.component';
 
 
 @NgModule({
