@@ -1,0 +1,34 @@
+.card {
+    @apply w-full h-full rounded-md shadow-black shadow-md relative;
+    scale: 1;
+    transition: all 0.3s linear;
+
+    &-bg {
+        &--hidden {
+            @apply w-full h-full absolute bg-red-500;
+
+            &:focus {
+                display:none;
+            }
+        }
+    }
+    
+    &-img {
+        &--wrapper {
+            @apply w-full h-full m-0;
+
+            &-tagimage {
+                @apply w-full h-full m-0;
+            }
+        }
+    }
+
+    &:hover {
+        @apply cursor-pointer;
+        scale: 1.2;
+    }
+}
+
+
+
+

@@ -1,0 +1,17 @@
+<div
+    *ngIf="use === 'memory'"
+    [id]="numberId"
+    class="card">
+
+    <div [ngClass]="{
+        'card-bg--hidden': showOverlay
+        }">
+    </div>
+    <figure class="card-img--wrapper">
+        <img
+            [name]="uuid"
+            [src]="image"
+            [alt]="title"
+            class="card-img--wrapper-tagimage">
+    </figure>
+</div>

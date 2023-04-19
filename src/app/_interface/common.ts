@@ -12,6 +12,7 @@ export interface Ifields {
 
 export interface dataCardWithGameMemory {
     fields: Ifields,
-    meta: object
+    meta: object,
+    use: string
 }
 
