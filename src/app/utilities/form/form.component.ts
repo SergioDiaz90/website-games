@@ -46,7 +46,7 @@ export class FormComponent implements OnInit {
       try {
         await this.sessionService.read_local_storage_data( this.myForm.value );
         await this.sessionService.write_session_storage_data( this.myForm.value );
-        this.router.navigate(['/memory']);
+        this.router.navigate(['/games']);
 
       } catch (error) {
         this.eventService.broadcast(

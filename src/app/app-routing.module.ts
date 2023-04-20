@@ -5,11 +5,11 @@ import { HomeComponent } from './views/home/home.component';
 const routes: Routes = [
   {
     path:"",
-    component: HomeComponent,
+    loadChildren: () => import('./views/home/home.module').then((m) => m.HomeModule )
   },
   {
-    path:"memory",
-    loadChildren: () => import('./games/memory-game/memory-game.module').then((m) => m.MemoryGameModule)
+    path:"games",
+    loadChildren: () => import('./games/games.module').then((m) => m.GamesModule)
   },
 ];
 

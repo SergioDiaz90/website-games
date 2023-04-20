@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'src/app/utilities/button/button.module';
 import { HomeComponent } from './home.component';
 import { CardModule } from 'src/app/utilities/card/card.module';
+import { HomeRoutingModule } from './home-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { CardModule } from 'src/app/utilities/card/card.module';
   imports: [
     CommonModule,
     ButtonModule,
-    CardModule
+    CardModule,
+    HomeRoutingModule
   ],
   exports: [
     HomeComponent
