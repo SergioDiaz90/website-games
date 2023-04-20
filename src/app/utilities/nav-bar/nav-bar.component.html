@@ -1,0 +1,20 @@
+
+<header class="header-wrapper">
+    <div class="header-wrapper--container">
+        <figure class="header-wrapper--container-brand">
+            <img
+                class="header-wrapper--container-brand-img"
+                src="../../../assets/images/logCognifit.png" alt="brand">
+        </figure>
+        
+        <div class="header-wrapper--container-btn">
+            <app-button nameBtn="Iniciar" (click)="actionInit = 'login'" ></app-button>
+            <app-button nameBtn="Registrarme" (click)="actionInit = 'register'"></app-button>
+        </div>
+    </div>
+</header>
+
+
+<div *ngIf="actionInit !== ''">
+    <app-card use="form" [typeForm]="actionInit"></app-card>
+</div>

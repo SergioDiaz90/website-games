@@ -1,9 +1,4 @@
-<app-button nameBtn="Iniciar" (click)="actionInit = 'login'" ></app-button>
-<app-button nameBtn="Registrarme" (click)="actionInit = 'register'"></app-button>
-
-<div *ngIf="actionInit !== ''">
-    <app-card use="form" [typeForm]="actionInit"></app-card>
-</div>
+<app-nav-bar></app-nav-bar>
 
 
 <div *ngIf="notificationInit">
