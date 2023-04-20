@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EventNotificationInfo } from 'src/app/_interface/event';
 import { EventService } from 'src/app/services/event.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -18,7 +19,8 @@ export class FormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
-    private eventService: EventService
+    private eventService: EventService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,20 +38,22 @@ export class FormComponent implements OnInit {
       response = await this.sessionService.write_local_storage_data( this.myForm.value );
 
       if ( response ) {
-        await this.sessionService.write_session_storage_data( this.myForm.value )
+        await this.sessionService.write_session_storage_data( this.myForm.value );
       }
     }
 
     if ( typeForm === 'login' ) {
       try {
         await this.sessionService.read_local_storage_data( this.myForm.value );
+        await this.sessionService.write_session_storage_data( this.myForm.value );
+        this.router.navigate(['/memory']);
+
       } catch (error) {
-        console.log( 'falla',response, error )
         this.eventService.broadcast(
             new EventNotificationInfo (
-            'Aviso',
-            'Aun no te has registrado, registrate para continuar',
-            'info'
+              'Aviso',
+              'Aun no te has registrado, registrate para continuar',
+              'info'
             ))
 
         this.myForm.reset();
