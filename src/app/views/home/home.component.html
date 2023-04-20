@@ -4,3 +4,9 @@
 <div *ngIf="actionInit !== ''">
     <app-card use="form" [typeForm]="actionInit"></app-card>
 </div>
+
+
+<div *ngIf="notificationInit">
+    <app-card use="info" [dataMessage]="dataMessage"></app-card>
+</div>
+

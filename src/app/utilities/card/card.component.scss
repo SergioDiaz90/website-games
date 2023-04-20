@@ -37,3 +37,14 @@
     width: 300px;
     height: 300px;
 }
+
+.message {
+    @apply absolute justify-center items-center rounded-sm shadow-sm px-4 py-2;
+    width: 150px;
+    right: 50%;
+    bottom: 50%;
+}
+
+.info {
+    @apply bg-cyan-200 text-black shadow-cyan-400;
+}

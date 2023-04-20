@@ -20,9 +20,11 @@ export class CardComponent implements OnInit {
   @Input() uuid: string = '';
   @Input() typeCard: string = '';
   @Input() typeForm: string = '';
+  @Input() dataMessage: any;
 
   async ngOnInit() {
     this.handlerTimeOutForOverlay ();
+    console.log( 'dataMessage', this.dataMessage );
   }
 
   private handlerTimeOutForOverlay () {

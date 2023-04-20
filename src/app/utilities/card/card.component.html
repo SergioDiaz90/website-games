@@ -21,3 +21,13 @@
     class="form-wrapper">
         <app-form [typeForm]="typeForm"></app-form>
 </div>
+
+<div
+    *ngIf="use === 'info'"
+    [ngClass]="{
+        'info': dataMessage.typeNotification === 'info'
+    }"
+    class="message">
+        <h4>{{ dataMessage.title }}</h4>
+        <p>{{ dataMessage.message }}</p>
+</div>
