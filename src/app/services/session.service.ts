@@ -56,11 +56,13 @@ export class SessionService {
 		}
 	}
 
-  public async read_local_storage_data ( data: any ): Promise<boolean> {
+	public async read_local_storage_data ( data: any ): Promise<boolean> {
 		let session = this.localStorage.select( data.name );
 		if ( session === null ) {
+			console.log('read_local_storage_data', session );
 			return Promise.reject( false );
 		}
+		
 		try{
 			// const res = await this.cryptoService.decrypt( session, SessionService.SECRET );
 			let tmp = JSON.parse( session );
