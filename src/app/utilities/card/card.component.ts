@@ -1,11 +1,13 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, NgModule, OnInit, ViewChild } from '@angular/core';
 import { dataCardWithGameMemory } from 'src/app/_interface/common';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
+
 export class CardComponent implements OnInit {
 
   constructor() { }
@@ -16,6 +18,8 @@ export class CardComponent implements OnInit {
   @Input() showOverlay: boolean = false;
   @Input() numberId: number | undefined;
   @Input() uuid: string = '';
+  @Input() typeCard: string = '';
+  @Input() typeForm: string = '';
 
   async ngOnInit() {
     this.handlerTimeOutForOverlay ();

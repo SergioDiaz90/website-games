@@ -15,3 +15,9 @@
             class="card-img--wrapper-tagimage">
     </figure>
 </div>
+
+<div
+    *ngIf="use === 'form'"
+    class="form-wrapper">
+        <app-form [typeForm]="typeForm"></app-form>
+</div>

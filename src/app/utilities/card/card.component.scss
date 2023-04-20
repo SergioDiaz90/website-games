@@ -32,3 +32,8 @@
 
 
 
+.form-wrapper {
+    @apply flex justify-center items-center rounded-sm bg-slate-400 shadow-md shadow-black;
+    width: 300px;
+    height: 300px;
+}

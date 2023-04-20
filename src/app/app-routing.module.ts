@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './views/home/home.component';
 
-const routes: Routes = [{
-  path:"",
-  loadChildren: () => import('./games/memory-game/memory-game.module').then((m) => m.MemoryGameModule)
-}];
+const routes: Routes = [
+  {
+    path:"",
+    component: HomeComponent,
+  },
+  {
+    path:"memory",
+    loadChildren: () => import('./games/memory-game/memory-game.module').then((m) => m.MemoryGameModule)
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
