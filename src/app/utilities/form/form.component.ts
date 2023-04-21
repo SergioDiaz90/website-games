@@ -35,18 +35,18 @@ export class FormComponent implements OnInit {
     let response = undefined;
 
     if ( typeForm === 'register') {
-      response = await this.sessionService.write_local_storage_data( this.myForm.value );
+      response = await this.sessionService.writeLocalStorageData( this.myForm.value );
 
       if ( response ) {
-        await this.sessionService.write_session_storage_data( this.myForm.value );
+        await this.sessionService.writeSessionStorageData( this.myForm.value );
         this.router.navigate(['/games']);
       }
     }
 
     if ( typeForm === 'login' ) {
       try {
-        await this.sessionService.read_local_storage_data( this.myForm.value );
-        await this.sessionService.write_session_storage_data( this.myForm.value );
+        await this.sessionService.readLocalStorageData( this.myForm.value );
+        await this.sessionService.writeSessionStorageData( this.myForm.value );
         this.router.navigate(['/games']);
 
       } catch (error) {

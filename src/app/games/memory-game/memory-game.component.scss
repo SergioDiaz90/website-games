@@ -1,7 +1,16 @@
-.memorygame-wrapper {
-    @apply w-4/5 grid gap-5 mx-auto my-auto;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(5, 120px);
-    height: 500px;
 
+.memorygame {
+    @apply w-4/5 grid gap-5 mx-auto my-auto;
+
+    &-score {
+        @apply w-4/5 flex justify-evenly bg-blue-400 m-auto;
+    }
+    
+    &-wrapper {
+        @apply w-full grid gap-5 mx-auto my-auto;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(5, 120px);
+        height: 500px;
+    
+    }
 }

@@ -5,9 +5,9 @@
 
     &-bg {
         &--hidden {
-            @apply w-full h-full absolute bg-red-500;
+            @apply w-full h-full absolute;
 
-            &:focus {
+            &.show {
                 display:none;
             }
         }

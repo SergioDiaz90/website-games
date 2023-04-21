@@ -13,7 +13,7 @@ export class SessionService {
 
 	constructor(
 		private sessionStorage: SessionStorageService,
-    private localStorage: LocalStorageService,
+		private localStorage: LocalStorageService,
 		// private eventService: EventService,
 		// private apiService: ApiService,
 		// private cryptoService: CryptoService
@@ -23,7 +23,7 @@ export class SessionService {
 
 
 
-	public async read_session_storage_data (): Promise<boolean> {
+	public async readSessionStorageData (): Promise<boolean> {
 		let session = this.sessionStorage.select( SessionService.STORAGE_KEY );
 		if ( session === null ) {
 			return Promise.reject( false );
@@ -42,7 +42,7 @@ export class SessionService {
 	}
 
 
-	public async write_session_storage_data ( data: any ): Promise<boolean>  {
+	public async writeSessionStorageData ( data: any ): Promise<boolean>  {
 		let message = JSON.stringify( data );
 		try {
 			// const res = await this.cryptoService.encrypt(message, SessionService.SECRET);
@@ -56,7 +56,7 @@ export class SessionService {
 		}
 	}
 
-	public async read_local_storage_data ( data: any ): Promise<boolean> {
+	public async readLocalStorageData ( data: any ): Promise<boolean> {
 		let session = this.localStorage.select( data.name );
 		if ( session === null ) {
 			console.log('read_local_storage_data', session );
@@ -75,7 +75,7 @@ export class SessionService {
 		}
 	}
 
-	public async write_local_storage_data ( data: any ): Promise<boolean>  {
+	public async writeLocalStorageData ( data: any ): Promise<boolean>  {
 		let message = JSON.stringify( data );
 		try {
 			// const res = await this.cryptoService.encrypt(message, SessionService.SECRET);
@@ -103,7 +103,7 @@ export class SessionService {
 
 
 	public isActive(){
-		this.read_session_storage_data();
+		this.readSessionStorageData();
 		return this.session_data !== null;
 	}
 

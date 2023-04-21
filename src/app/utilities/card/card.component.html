@@ -3,10 +3,11 @@
     [id]="numberId"
     class="card">
 
-    <div [ngClass]="{
-        'card-bg--hidden': showOverlay
-        }">
-    </div>
+    <img [ngClass]="{
+        'show': !showOverlay
+        }"
+        class="card-bg--hidden"
+        src="../../../assets/images/lomoCartas.png" alt="lomo">
     <figure class="card-img--wrapper">
         <img
             [name]="uuid"
