@@ -1,0 +1,35 @@
+<div class="slider">
+    <div class="slider-content">
+        <figure
+            *ngFor="let obj of sliderData.slider; let i = index"
+            class='slider-content--media'>
+            <video class='slider-content--media-tag'
+                [src]="obj"
+                loop
+                object-fit="contain"
+                autoplay>
+            </video>
+            <figcaption class='slider-content--phrase'>
+                <h3>Sé la mejor versión de ti mismo</h3>
+                <h1>Mantén tu cerebro en forma</h1>
+                <h4>Aprovecha al máximo tu memoria, concentración y otras 22 habilidades cognitivas</h4>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+
+
+<!-- div(class="slider-content")
+        each obj,index in slider
+            figure(class=`slider-content--img` id=`${obj.id}` section=`${obj.selected}` value=`${obj.depth}`)
+                img
+                figcaption(class='slider-content--phrase')
+                    div
+                        each phrase in obj.phrases
+                            h1=phrase
+    div(class="slider-content--overlay")
+    ul(class="slider-content-controls")
+            -let cnt = slider.length;
+            -let idx = 0;
+            while idx < cnt 
+                li(class="slider-content-controls--list" idx=idx++) -->

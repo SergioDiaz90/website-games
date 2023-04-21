@@ -1,0 +1,88 @@
+.slider {
+    @apply w-full relative overflow-hidden shadow-lg bg-black;
+    height: 70vh;
+    margin: 0 0 213px 0;
+    box-shadow: 0px 5px 6px black;
+
+    .slider-content {
+        @apply h-full relative inline-block;
+        white-space: nowrap;
+        transition: all 0.3s;
+        font-size:0px;
+
+    
+        &--media {
+            @apply relative m-auto;
+            width: 64%;
+            
+    
+            &-tag {
+                @apply w-full h-full
+            }
+        }
+
+        &--phrase {
+            @apply absolute;
+            width: 25%;
+            height: 25%;
+            bottom: 10%;
+            left: 10%;
+            z-index: 2;
+
+            h1 {
+                @apply m-1 font-bold text-white text-3xl;
+                line-height: initial;
+            }
+
+            h3 {
+                @apply m-1 font-medium text-white text-xl;
+                line-height: initial;
+            }
+
+            h4 {
+                @apply m-1 font-normal text-white text-lg;
+                line-height: initial;
+            }
+        }
+
+        // .slider-content {
+        //     @apply w-full h-full relative;
+        //     white-space: nowrap;
+        //     transition: all 0.3s;
+        //     font-size:0px;
+    
+        //     &--overlay {
+        //         @apply w-full h-full bg-black absolute;
+        //         top:0;
+        //         opacity: 0.3;
+        //     }
+    
+        //     &--img {
+        //         @apply w-full h-full relative inline-block;
+        //         white-space: nowrap;
+                
+        //         img {
+        //             @apply w-full h-full relative;
+        //         }
+                
+        //         .slider-content--phrase {
+        //             @apply relative;
+        //             width: 25%;
+        //             height: 25%;
+        //             bottom: 30%;
+        //             left: 10%;
+        //             z-index: 2;
+    
+        //             h1 {
+        //                 @apply font-bold text-white;
+        //                 font-size: 2vw;
+        //                 text-shadow: 2px 2px 2px #8C8987;
+        //                 line-height: initial;
+        //             }
+        //         }
+        //     }
+    
+        // }
+    
+    }
+}
