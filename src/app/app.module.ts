@@ -11,6 +11,7 @@ import { CardModule } from './utilities/card/card.module';
 import { FormModule } from './utilities/form/form.module';
 import { ButtonModule } from './utilities/button/button.module';
 import { HomeModule } from './views/home/home.module';
+import { AppGuard } from './app-guard.guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { HomeModule } from './views/home/home.module';
     ButtonModule,
     HomeModule
   ],
-  providers: [ RequestService ],
+  providers: [ RequestService, AppGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
