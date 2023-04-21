@@ -4,7 +4,13 @@ import { GamesComponent } from './games.component';
 
 const routes: Routes = [{
   path: '',
-  component: GamesComponent
+  component: GamesComponent,
+  children: [
+    {
+      path: 'memory',
+      loadChildren: () => import('./memory-game/memory-game.module').then((m) => m.MemoryGameModule ),
+    },
+  ]
 }];
 
 @NgModule({

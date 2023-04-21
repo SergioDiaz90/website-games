@@ -9,7 +9,7 @@ export class SessionService {
 
   private static readonly STORAGE_KEY:string = 'session';
 	// private static readonly SECRET: any = ENVIRONMENT.SECRET;
-	public session_data!: any;
+	public session_data: any;
 
 	constructor(
 		private sessionStorage: SessionStorageService,
@@ -33,7 +33,7 @@ export class SessionService {
 			let tmp = JSON.parse( session );
 
 			this.session_data = tmp;
-			this.broadcastToggleSession();
+			// this.broadcastToggleSession();
 			return Promise.resolve( true );
 		} catch ( error ) {
 			this.end();
@@ -75,7 +75,7 @@ export class SessionService {
 		}
 	}
 
-  public async write_local_storage_data ( data: any ): Promise<boolean>  {
+	public async write_local_storage_data ( data: any ): Promise<boolean>  {
 		let message = JSON.stringify( data );
 		try {
 			// const res = await this.cryptoService.encrypt(message, SessionService.SECRET);
@@ -96,48 +96,6 @@ export class SessionService {
 	}
 
 
-
-	// public set_credentials ( credentials: any ): Promise<any> {
-	// 	let storage = {
-	// 		'credentials': credentials
-	// 	};
-	// 	return this.write_session_storage_data( storage ).then( res => {
-	// 		return Promise.resolve( res );
-	// 	}).catch( error => {
-	// 			return Promise.resolve( error );
-	// 	})
-	// }
-
-	// public set_credentials_sid ( sid: String ): Promise<any> {
-	// 	let storage = {
-	// 		'credentials': {
-	// 			'x-hablame-sid' : sid,
-	// 		},
-	// 	};
-	// 	return this.write_session_storage_data( storage ).then( res => {
-	// 		return Promise.resolve( res );
-	// 	}).catch( error => {
-	// 			return Promise.resolve( error );
-	// 	})
-	// }
-
-	// public set_credentials_api ( account: string, apikey:string, token:string ): Promise<any> {
-	// 	let storage = {
-	// 		'credentials': {
-	// 			'account' : account,
-	// 			'apikey': apikey,
-	// 			'token': token
-	// 		}
-	// 	};
-	// 	return this.write_session_storage_data( storage ).then( res => {
-	// 		return Promise.resolve( res );
-	// 	}).catch( error => {
-	// 			return Promise.resolve( error );
-	// 	})
-	// }
-
-
-
 	public get (){
 		return this.session_data;
 	}
@@ -145,6 +103,7 @@ export class SessionService {
 
 
 	public isActive(){
+		this.read_session_storage_data();
 		return this.session_data !== null;
 	}
 

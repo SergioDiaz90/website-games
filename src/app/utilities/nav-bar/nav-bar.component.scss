@@ -16,5 +16,17 @@
         &-btn {
             @apply w-52 flex justify-between my-auto;
         }
+
+        &-nav {
+            @apply flex w-4/5 items-center;
+
+            &-list {
+                @apply w-full;
+
+                &-item {
+                    @apply text-white list-none;
+                }
+            }
+        }
     }
 }

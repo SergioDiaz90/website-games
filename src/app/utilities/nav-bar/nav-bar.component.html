@@ -7,10 +7,21 @@
                 src="../../../assets/images/logCognifit.png" alt="brand">
         </figure>
         
-        <div class="header-wrapper--container-btn">
+        <div
+            *ngIf="!isActive"
+            class="header-wrapper--container-btn">
             <app-button nameBtn="Iniciar" (click)="actionInit = 'login'" ></app-button>
             <app-button nameBtn="Registrarme" (click)="actionInit = 'register'"></app-button>
         </div>
+
+        <nav *ngIf="isActive" class="header-wrapper--container-nav">
+            <ul class="header-wrapper--container-nav-list">
+                <li
+                    (click)="navigateTo('memory')"
+                    class="header-wrapper--container-nav-list-item">Memoria</li>
+            </ul>
+            <app-button nameBtn="Salir" (click)="logOut()"></app-button>
+        </nav>
     </div>
 </header>
 

@@ -39,6 +39,7 @@ export class FormComponent implements OnInit {
 
       if ( response ) {
         await this.sessionService.write_session_storage_data( this.myForm.value );
+        this.router.navigate(['/games']);
       }
     }
 

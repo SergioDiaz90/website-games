@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
 import { MemoryGameModule } from './memory-game/memory-game.module';
 import { GamesRoutingModule } from './game-routing.module';
+import { NavBarModule } from '../utilities/nav-bar/nav-bar.module';
 
 
 
@@ -15,7 +16,8 @@ import { GamesRoutingModule } from './game-routing.module';
   imports: [
     CommonModule,
     GamesRoutingModule,
-    MemoryGameModule
+    MemoryGameModule,
+    NavBarModule
   ],
   exports: [
     GamesComponent
