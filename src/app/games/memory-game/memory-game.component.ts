@@ -3,6 +3,8 @@ import { environment } from '../../../environments/environment';
 import { RequestService } from 'src/app/services/request.service';
 import { dataCardWithGameMemory } from 'src/app/_interface/common';
 import { SessionService } from 'src/app/services/session.service';
+import { EventService } from 'src/app/services/event.service';
+import { EventNotification, EventNotificationInfo } from 'src/app/_interface/event';
 
 @Component({
   selector: 'app-memory-game',
@@ -37,7 +39,8 @@ export class MemoryGameComponent implements OnInit {
   constructor(
     private requestService: RequestService,
     private render: Renderer2,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private eventService: EventService
   ) { }
 
   async ngOnInit() {
@@ -75,7 +78,6 @@ export class MemoryGameComponent implements OnInit {
   }
 
   private addClassForHiddenCard ( objs: any ){
-    console.log('addClassForHiddenCard', objs );
     for (let idx in objs ) {
       this.render.removeClass( objs[idx].reference, 'show' ); 
     }
@@ -102,6 +104,12 @@ export class MemoryGameComponent implements OnInit {
   }
 
   private reloadGame () {
+    this.eventService.broadcast( new EventNotificationInfo (
+      'Felicidadaes',
+      'Has ganado esta partida',
+      'success'
+    ))
+
     this.handlerShowOverlayCardAndReloadSelection( false , true , undefined, true );
     this.scoreGame.success = 0;
     this.scoreGame.mistakes = 0;

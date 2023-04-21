@@ -24,9 +24,10 @@
 </div>
 
 <div
-    *ngIf="use === 'info'"
+    *ngIf="use === 'info' || use === 'success'"
     [ngClass]="{
-        'info': dataMessage.typeNotification === 'info'
+        'info': dataMessage.typeNotification === 'info',
+        'success': dataMessage.typeNotification === 'success'
     }"
     class="message">
         <h4>{{ dataMessage.title }}</h4>

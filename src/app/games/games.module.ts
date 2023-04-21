@@ -6,6 +6,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MemoryGameModule } from './memory-game/memory-game.module';
 import { GamesRoutingModule } from './game-routing.module';
 import { NavBarModule } from '../utilities/nav-bar/nav-bar.module';
+import { CardModule } from '../utilities/card/card.module';
 
 
 
@@ -17,7 +18,8 @@ import { NavBarModule } from '../utilities/nav-bar/nav-bar.module';
     CommonModule,
     GamesRoutingModule,
     MemoryGameModule,
-    NavBarModule
+    NavBarModule,
+    CardModule
   ],
   exports: [
     GamesComponent
