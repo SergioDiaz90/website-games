@@ -74,6 +74,7 @@ export class MemoryGameComponent implements OnInit {
       let copy = { ...this.selections }
       this.scoreGame.success += 1;
       this.foundPairs.push(copy);
+      this.handlerShowOverlayCardAndReloadSelection( true , true );
     }
 
     if ( this.selections.first.title !== this.selections.second.title ) {
@@ -102,6 +103,8 @@ export class MemoryGameComponent implements OnInit {
     if ( clear ) {
       this.selections.first = {};
       this.selections.second = {};
+
+      console.log('clear', {...this.selections} );
     }
 
   }
@@ -109,7 +112,7 @@ export class MemoryGameComponent implements OnInit {
   private handlerNoRepeatSelection ( title: string ): any {
     if ( this.scoreGame.success !== 0 ) {
       let result = this.foundPairs.filter((elm: { first: { title: string; }; second: { title: any; }; }) => elm.first.title === title || elm.second.title === title );
-      console.log('result', result )
+      console.log('result', result , {...this.selections})
       return result.length > 0 ? true : false;
     }
     
