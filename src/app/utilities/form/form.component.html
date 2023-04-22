@@ -1,0 +1,15 @@
+<form
+    [formGroup]="myForm"
+    class="form"
+    (ngSubmit)="sendForm(typeForm)">
+
+    <h3 *ngIf="typeForm === 'register'"> Registrate </h3>
+    <h3 *ngIf="typeForm === 'login'"> Iniciar Sesión </h3>
+    <label class="form-label" for="name">Nombre:</label>
+    <input class="form-input" type="text" formControlName="name" id="name">
+
+    <label class="form-label" for="email">Correo:</label>
+    <input class="form-input" type="email" formControlName="email" id="email">
+
+    <button class="form-btn" type="submit">Enviar</button>
+</form>

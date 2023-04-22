@@ -2,6 +2,9 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { environment } from '../../../environments/environment';
 import { RequestService } from 'src/app/services/request.service';
 import { dataCardWithGameMemory } from 'src/app/_interface/common';
+import { SessionService } from 'src/app/services/session.service';
+import { EventService } from 'src/app/services/event.service';
+import { EventNotification, EventNotificationInfo } from 'src/app/_interface/event';
 
 @Component({
   selector: 'app-memory-game',
@@ -35,7 +38,9 @@ export class MemoryGameComponent implements OnInit {
 
   constructor(
     private requestService: RequestService,
-    private render: Renderer2
+    private render: Renderer2,
+    private sessionService: SessionService,
+    private eventService: EventService
   ) { }
 
   async ngOnInit() {
@@ -68,13 +73,52 @@ export class MemoryGameComponent implements OnInit {
       .find( node => node.className === 'card-img--wrapper').firstChild;
   }
 
-  private handlerScoreGame () {
+  private addClassForHiddenCard ( objs: any ){
+    for (let idx in objs ) {
+      this.render.removeClass( objs[idx].reference, 'show' ); 
+    }
+  }
+
+  private async saveScoreInUser () {
+    let session = this.sessionService.get()
+    session = await this.sessionService.readLocalStorageData( session );
+
+    if ( !session?.games?.memory ) {
+
+      session = { ...session,
+        games: {
+          memory: [ this.scoreGame ], 
+        }
+      }
+    } else {
+      session.games.memory.push( this.scoreGame );
+    }
+    
+    return await this.sessionService.writeLocalStorageData( session );
+  }
+
+  private reloadGame () {
+    this.eventService.broadcast( new EventNotificationInfo (
+      'Felicidadaes',
+      'Has ganado esta partida',
+      'success'
+    ))
+
+    this.handlerShowOverlayCardAndReloadSelection( false , true , undefined, true );
+    this.scoreGame.success = 0;
+    this.scoreGame.mistakes = 0;
+    this.foundPairs = [];
+  }
+
+  private async handlerScoreGame () {
 
     if ( this.selections.first.title === this.selections.second.title ) {
-      let copy = { ...this.selections }
       this.scoreGame.success += 1;
+      let copy = { ...this.selections }
       this.foundPairs.push(copy);
+      this.handlerShowOverlayCardAndReloadSelection( true , true );
     }
+
 
     if ( this.selections.first.title !== this.selections.second.title ) {
       this.scoreGame.mistakes += 1;
@@ -84,19 +128,31 @@ export class MemoryGameComponent implements OnInit {
       }, 1000 );
     }
 
-    console.log('handlerScoreGame', this.scoreGame );
+    if ( this.scoreGame.success === this.dataGame.entries.length / 2 ) { // review error in async change success
+      if (await this.saveScoreInUser()) {
+        this.reloadGame();
+        return
+      }
+    }
   }
 
-  private handlerShowOverlayCardAndReloadSelection ( show: boolean, clear: boolean = false, reference: any = undefined ) {
+  private handlerShowOverlayCardAndReloadSelection (
+      show: boolean, clear: boolean = false,
+      reference: any = undefined, refresh: boolean = false
+    ) {
 
     if ( show && reference ) {
-      this.render.removeClass( reference, 'card-bg--hidden' );
+      this.render.addClass( reference, 'show' );
     }
 
-    if ( !show ) {
-      for (let idx in this.selections ) {
-        this.render.addClass( this.selections[idx].reference, 'card-bg--hidden' );
-      }
+    if ( !show && !refresh ) {
+      this.addClassForHiddenCard( this.selections );
+    }
+    
+    if ( refresh ) {
+      this.foundPairs.map((obj: any) => {
+        this.addClassForHiddenCard( obj );
+      })
     }
 
     if ( clear ) {
@@ -109,7 +165,6 @@ export class MemoryGameComponent implements OnInit {
   private handlerNoRepeatSelection ( title: string ): any {
     if ( this.scoreGame.success !== 0 ) {
       let result = this.foundPairs.filter((elm: { first: { title: string; }; second: { title: any; }; }) => elm.first.title === title || elm.second.title === title );
-      console.log('result', result )
       return result.length > 0 ? true : false;
     }
     
@@ -139,24 +194,22 @@ export class MemoryGameComponent implements OnInit {
       handlingEvent.full = true;
       handlingEvent.reference = e.target;
       this.handlerShowOverlayCardAndReloadSelection( true, false, handlingEvent.reference );
-      console.log('handlingEvent', handlingEvent );
     } else {
-      console.log('esta carta esta repetida')
       this.handlerShowOverlayCardAndReloadSelection( true, true );
       return
     }
 
     if ( !this.selections.first.full ) {
       this.selections.first = handlingEvent
+      this.selections.first.key = 'first'
     } else {
       this.selections.second = handlingEvent;
+      this.selections.second.key = 'second'
     }
     
     if ( this.selections.first.full && this.selections.second.full ) {
       this.handlerScoreGame();
     }
   }
-
-
 
 }

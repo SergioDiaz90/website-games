@@ -1,0 +1,38 @@
+.header-wrapper {
+    @apply w-full bg-black;
+
+    &--container {
+        @apply flex justify-between m-auto;
+        width: 95%;
+
+        &-brand {
+            @apply w-48 m-3 cursor-pointer;
+
+            &-img {
+                @apply w-full;
+            }
+        }
+
+        &-btn {
+            @apply w-52 flex justify-between my-auto;
+        }
+
+        &-nav {
+            @apply flex w-4/5 items-center;
+
+            &-list {
+                @apply w-full;
+
+                &-item {
+                    @apply w-24 text-white list-none text-center px-2 py-1 rounded-md cursor-pointer;
+                    font-family: 'roboto';
+                    font-weight: 400;
+
+                    &:hover {
+                        @apply bg-blue-500;
+                    }
+                }
+            }
+        }
+    }
+}

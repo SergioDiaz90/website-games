@@ -1,18 +1,24 @@
-<div class="memorygame-score">
-    <h1>Aciertos: {{ scoreGame.success }}</h1>
-    <h1>Errores: {{ scoreGame.mistakes }}</h1>
-</div>
 <div
     *ngIf="dataGame !== undefined"
-    class="memorygame-wrapper">
-    <div *ngFor="let objCard of dataGame.entries; let i = index" >
-        <app-card
-            [image]="objCard.fields.image.url"
-            [title]="objCard.fields.image.title"
-            [uuid]="objCard.fields.image.uuid"
-            [use]="'memory'"
-            [numberId]="i"
-            (click)="handlerSelectionCard($event)"
-            #card></app-card>
+    class="memorygame">
+
+    <div class="memorygame-score">
+        <h2>Marcador</h2>
+        <h3>Aciertos: {{ scoreGame.success }}</h3>
+        <h3>Errores: {{ scoreGame.mistakes }}</h3>
+    </div>
+
+    <div class="memorygame-wrapper">
+        <div *ngFor="let objCard of dataGame.entries; let i = index" >
+            <app-card
+                [image]="objCard.fields.image.url"
+                [title]="objCard.fields.image.title"
+                [uuid]="objCard.fields.image.uuid"
+                [use]="'memory'"
+                [numberId]="i"
+                typeCard="memory"
+                (click)="handlerSelectionCard($event)"
+                #card></app-card>
+        </div>
     </div>
 </div>

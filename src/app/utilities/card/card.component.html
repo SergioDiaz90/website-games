@@ -3,10 +3,11 @@
     [id]="numberId"
     class="card">
 
-    <div [ngClass]="{
-        'card-bg--hidden': showOverlay
-        }">
-    </div>
+    <img [ngClass]="{
+        'show': !showOverlay
+        }"
+        class="card-bg--hidden"
+        src="../../../assets/images/lomoCartas.png" alt="lomo">
     <figure class="card-img--wrapper">
         <img
             [name]="uuid"
@@ -14,4 +15,21 @@
             [alt]="title"
             class="card-img--wrapper-tagimage">
     </figure>
+</div>
+
+<div
+    *ngIf="use === 'form'"
+    class="form-wrapper">
+        <app-form [typeForm]="typeForm"></app-form>
+</div>
+
+<div
+    *ngIf="use === 'info' || use === 'success'"
+    [ngClass]="{
+        'info': dataMessage.typeNotification === 'info',
+        'success': dataMessage.typeNotification === 'success'
+    }"
+    class="message">
+        <h4>{{ dataMessage.title }}</h4>
+        <p>{{ dataMessage.message }}</p>
 </div>

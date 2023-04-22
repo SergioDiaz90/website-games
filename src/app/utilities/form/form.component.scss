@@ -1,0 +1,21 @@
+.form {
+    @apply flex flex-col gap-3 m-auto;
+
+    &-label {
+        @apply font-bold font-sans;
+    }
+
+    &-input {
+        @apply p-2 rounded-md;
+        border: 1px solid #ccc;
+    }
+
+    &-btn {
+        @apply bg-blue-500 text-white py-2 px-4 border-none rounded-md cursor-pointer;
+
+        &:hover {
+            @apply bg-blue-700
+        }
+    }
+
+}

@@ -1,0 +1,19 @@
+<div class="slider">
+    <div class="slider-content">
+        <figure
+            *ngFor="let obj of sliderData.slider; let i = index"
+            class='slider-content--media'>
+            <video class='slider-content--media-tag'
+                [src]="obj"
+                loop
+                object-fit="contain"
+                autoplay>
+            </video>
+            <figcaption class='slider-content--phrase'>
+                <h3 class="font-sans">Sé la mejor versión de ti mismo</h3>
+                <h1>Mantén tu cerebro en forma</h1>
+                <h4>Aprovecha al máximo tu memoria, concentración y otras 22 habilidades cognitivas</h4>
+            </figcaption>
+        </figure>
+    </div>
+</div>

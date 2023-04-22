@@ -5,9 +5,9 @@
 
     &-bg {
         &--hidden {
-            @apply w-full h-full absolute bg-red-500;
+            @apply w-full h-full absolute;
 
-            &:focus {
+            &.show {
                 display:none;
             }
         }
@@ -32,3 +32,26 @@
 
 
 
+.form-wrapper {
+    @apply absolute flex justify-center items-center rounded-sm bg-stone-100 shadow-md shadow-black;
+    width: 300px;
+    height: 300px;
+    right: 2.5%;
+    top: 8%;
+    z-index: 5;
+}
+
+.message {
+    @apply absolute justify-center items-center rounded-sm shadow-sm px-4 py-2;
+    width: 400px;
+    right: calc( 60% - 400px );
+    bottom: 50%;
+}
+
+.info {
+    @apply bg-cyan-200 text-black shadow-cyan-400;
+}
+
+.success {
+    @apply bg-green-500 text-white shadow-green-700;
+}
