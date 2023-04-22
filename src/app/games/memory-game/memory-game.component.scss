@@ -12,5 +12,9 @@
         grid-template-rows: repeat(5, 120px);
         height: 500px;
     
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(10, 120px);
+        }
     }
 }

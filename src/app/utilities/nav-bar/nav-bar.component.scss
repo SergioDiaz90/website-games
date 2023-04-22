@@ -24,7 +24,13 @@
                 @apply w-full;
 
                 &-item {
-                    @apply text-white list-none;
+                    @apply w-24 text-white list-none text-center px-2 py-1 rounded-md cursor-pointer;
+                    font-family: 'roboto';
+                    font-weight: 400;
+
+                    &:hover {
+                        @apply bg-blue-500;
+                    }
                 }
             }
         }

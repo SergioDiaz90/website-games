@@ -3,6 +3,28 @@ body {
     margin: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: roboto;
+}
+
 h1 {
     display: inline-block;
+    font-weight: bold;
+}
+
+h3 {
+    font-weight: 300;
+}
+
+h4 {
+    font-weight: 200;
+}
+
+
+
+@font-face {
+    font-family: 'roboto';
+    src: url('./assets/fonts/ROBOTO.ttf') format('truetype'),
+        url('./assets/fonts/ROBOTOBOLD.ttf') format('truetype'),
+        url('./assets/fonts/ROBOTOLIGHT.ttf') format('truetype');
 }
