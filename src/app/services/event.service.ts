@@ -3,11 +3,11 @@ import { EventType } from '../_interface/event';
 import { Subscription } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class EventService {
 
-  private routerEvents: any;
+	private routerEvents: any;
 	private events: any;
 	public scroll: boolean = false;
 

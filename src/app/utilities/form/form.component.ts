@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EventNotificationInfo } from 'src/app/_interface/event';
 import { EventService } from 'src/app/services/event.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({

@@ -23,7 +23,6 @@ export class SliderComponent implements OnInit {
   ){ }
 
   ngOnInit(): void {
-    console.log( 'slider', this.selected );
     this.start();
   }
 

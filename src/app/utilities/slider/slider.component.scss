@@ -50,21 +50,11 @@
                 @apply m-1 font-normal text-white 2xl:text-lg md:text-lg sm:text-base;
                 line-height: initial;
             }
-
-            // @media (max-width: 1024px) {
-            //     height: 53vh;
-            // }
         
             @media (max-width: 768px) {
                 left: 4%;
             }
-        
-            // @media (max-width: 640px) {
-            //     left: 4%;
-            // }
         }
-
-    
     }
 
     @media (max-width: 1024px) {

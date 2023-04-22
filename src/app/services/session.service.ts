@@ -3,20 +3,16 @@ import { SessionStorageService } from './session-storage.service';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class SessionService {
 
-  private static readonly STORAGE_KEY:string = 'session';
-	// private static readonly SECRET: any = ENVIRONMENT.SECRET;
+	private static readonly STORAGE_KEY:string = 'session';
 	public session_data: any;
 
 	constructor(
 		private sessionStorage: SessionStorageService,
 		private localStorage: LocalStorageService,
-		// private eventService: EventService,
-		// private apiService: ApiService,
-		// private cryptoService: CryptoService
 	) {
 		this.init();
 	}
@@ -29,11 +25,8 @@ export class SessionService {
 			return Promise.reject( false );
 		}
 		try{
-			// const res = await this.cryptoService.decrypt( session, SessionService.SECRET );
 			let tmp = JSON.parse( session );
-
 			this.session_data = tmp;
-			// this.broadcastToggleSession();
 			return Promise.resolve( true );
 		} catch ( error ) {
 			this.end();
@@ -45,9 +38,7 @@ export class SessionService {
 	public async writeSessionStorageData ( data: any ): Promise<boolean>  {
 		let message = JSON.stringify( data );
 		try {
-			// const res = await this.cryptoService.encrypt(message, SessionService.SECRET);
 			this.session_data = data;
-
 			this.sessionStorage.insert( SessionService.STORAGE_KEY, message );
 			return true;
 		} catch (error) {
@@ -59,16 +50,12 @@ export class SessionService {
 	public async readLocalStorageData ( data: any ): Promise<boolean> {
 		let session = this.localStorage.select( data.name );
 		if ( session === null ) {
-			console.log('read_local_storage_data', session );
 			return Promise.reject( false );
 		}
 		
 		try{
-			// const res = await this.cryptoService.decrypt( session, SessionService.SECRET );
 			let tmp = JSON.parse( session );
-
 			this.session_data = tmp;
-
 			return this.session_data;
 		} catch ( error ) {
 			return Promise.reject( false );
@@ -78,9 +65,7 @@ export class SessionService {
 	public async writeLocalStorageData ( data: any ): Promise<boolean>  {
 		let message = JSON.stringify( data );
 		try {
-			// const res = await this.cryptoService.encrypt(message, SessionService.SECRET);
 			this.session_data = data;
-
 			this.localStorage.insert( data.name, message );
 			return true;
 		} catch (error) {
@@ -89,25 +74,14 @@ export class SessionService {
 		}
 	}
 
-	private broadcastToggleSession() {
-		let isSessionActive = this.isActive();
-		// let event = new EventToggleSession( isSessionActive );
-		// this.eventService.broadcast( event );
-	}
-
-
 	public get (){
 		return this.session_data;
 	}
-
-
 
 	public isActive(){
 		this.readSessionStorageData();
 		return this.session_data !== null;
 	}
-
-
 
 	public end (){
 		this.session_data = null;
@@ -115,11 +89,8 @@ export class SessionService {
 		// this.broadcastToggleSession();
 	}
 
-
 	private init() {
 		this.session_data = null;
-		// this.broadcastToggleSession();
 	}
-
 
 }

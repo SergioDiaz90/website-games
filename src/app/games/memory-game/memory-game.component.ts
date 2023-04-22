@@ -45,9 +45,6 @@ export class MemoryGameComponent implements OnInit {
 
   async ngOnInit() {
     await this.getDataCards();
-    console.log( 'score', { 
-      success: this.scoreGame.success, error: this.scoreGame.mistakes, all: this.dataGame.entries.length / 2
-    })
   }
 
   private async getDataCards () {
@@ -66,7 +63,6 @@ export class MemoryGameComponent implements OnInit {
       this.getDataCards();
     } else {
       this.dataGame.entries.sort(() => Math.random() - 0.5 );
-      console.log('dataGame', this.dataGame , this.scoreGame.success );
       return
     }
 
@@ -87,7 +83,6 @@ export class MemoryGameComponent implements OnInit {
     let session = this.sessionService.get()
     session = await this.sessionService.readLocalStorageData( session );
 
-    console.log( 'session', session )
     if ( !session?.games?.memory ) {
 
       session = { ...session,
@@ -99,7 +94,6 @@ export class MemoryGameComponent implements OnInit {
       session.games.memory.push( this.scoreGame );
     }
     
-    console.log( 'saveScoreInUser', session )
     return await this.sessionService.writeLocalStorageData( session );
   }
 
@@ -117,9 +111,6 @@ export class MemoryGameComponent implements OnInit {
   }
 
   private async handlerScoreGame () {
-    console.log( 'score', { 
-      success: this.scoreGame.success, error: this.scoreGame.mistakes, all: this.dataGame.entries.length / 2
-    })
 
     if ( this.selections.first.title === this.selections.second.title ) {
       this.scoreGame.success += 1;
@@ -220,7 +211,5 @@ export class MemoryGameComponent implements OnInit {
       this.handlerScoreGame();
     }
   }
-
-
 
 }

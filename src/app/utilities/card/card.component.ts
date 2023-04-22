@@ -24,7 +24,6 @@ export class CardComponent implements OnInit {
 
   async ngOnInit() {
     this.handlerTimeOutForOverlay ();
-    console.log( 'dataMessage', this.dataMessage );
   }
 
   private handlerTimeOutForOverlay () {
