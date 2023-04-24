@@ -13,3 +13,11 @@ Corre `ng build` para crear la versión de producción del proyecto. Los artefac
 ## Sitio desplegado
 
 Para ver sl sitio web desplegado puedes hacer [click aqui](https://website-games.vercel.app/) y revisar el sitio, este fue desplegado en vercel, una plataforma para despliegues de projectos frontend.
+
+
+## Pasos para probar el juego memoria
+
+Para probar el juego es necesario
+ - Registrarse.
+ - Navegar al juego memoria despues de registrarse y loguearse.
+ - Iniciar el juego.
